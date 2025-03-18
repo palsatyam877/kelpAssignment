@@ -27,7 +27,7 @@ const formatRawJsonToRequiredFormat = (results) => {
     return users
 }
 
-const addDataToDB = async (results , next) => {
+const addDataToDB = async (results) => {
     const users = formatRawJsonToRequiredFormat(results)
     const columns = new pgp.helpers.ColumnSet(["name", "age", "address", "additional_info"], { table: "users" });
     const query = pgp.helpers.insert(users, columns);
@@ -72,7 +72,7 @@ const addDataToDB = async (results , next) => {
     return users
 }
 
-export const convertCsvToJsonRaw = async (next) => {
+export const convertCsvToJsonRaw = async () => {
     let allUserData = []
    
     try {
@@ -117,7 +117,7 @@ export const convertCsvToJsonRaw = async (next) => {
     }    
     
     try {
-        allUserData = addDataToDB(allUserData , next)
+        allUserData = addDataToDB(allUserData)
     } catch (err) {
         throw err;
     }   
